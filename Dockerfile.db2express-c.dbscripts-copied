@@ -1,0 +1,25 @@
+# Purpose: To copy the DB2 scripts to the database server.  
+# These come from deployment environment creation where bpm.de.deferSchemaCreation=true
+
+# Requirements
+# 1. db2.tar - These are the database scripts from a create deployment environment where bpm.de.deferSchemaCreation=true
+# 2. Dockerfile.db2express-c.dbscripts-copied
+
+# To build
+# docker build -t gmortel/db2express-c:dbscripts-copied -f Dockerfile.db2express-c.dbscripts-copied .
+
+FROM ibmcom/db2express-c
+MAINTAINER Gerard Mortel "gmortel@us.ibm.com / gerard.mortel@gmail.com"
+
+ADD db2.tar /tmp/
+
+# +-----------------------------------------------+
+# |       gmortel/db2express-c:de-created         |  <-- Deployment environment created against database
+# +-----------------------------------------------+
+# |     gmortel/db2express-c:database-created     |  <-- BPM Advanced 856 BPM db, CMN db and PDW db created
+# +-----------------------------------------------+
+# |     gmortel/db2express-c:dbscripts-copied     |  <-- Database scripts copied to image (YOU ARE HERE)
+# +-----------------------------------------------+
+# |              ibmcom/db2express-c              |  <-- DB2 Express-C 10.5.0.5
+# +-----------------------------------------------+
+
